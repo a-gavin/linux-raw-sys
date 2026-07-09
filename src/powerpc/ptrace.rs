@@ -30,6 +30,7 @@ pub type __kernel_ssize_t = crate::ctypes::c_int;
 pub type __kernel_ptrdiff_t = crate::ctypes::c_int;
 pub type __kernel_off_t = __kernel_long_t;
 pub type __kernel_loff_t = crate::ctypes::c_longlong;
+pub type __kernel_uoff_t = crate::ctypes::c_ulonglong;
 pub type __kernel_old_time_t = __kernel_long_t;
 pub type __kernel_time_t = __kernel_long_t;
 pub type __kernel_time64_t = crate::ctypes::c_longlong;
@@ -190,6 +191,8 @@ pub trap: crate::ctypes::c_ulong,
 pub dar: crate::ctypes::c_ulong,
 pub dsisr: crate::ctypes::c_ulong,
 pub result: crate::ctypes::c_ulong,
+pub exit_flags: crate::ctypes::c_ulong,
+pub __pt_regs_pad: [crate::ctypes::c_ulong; 3usize],
 }
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
@@ -395,6 +398,8 @@ pub const AUDIT_IPE_CONFIG_CHANGE: u32 = 1421;
 pub const AUDIT_IPE_POLICY_LOAD: u32 = 1422;
 pub const AUDIT_LANDLOCK_ACCESS: u32 = 1423;
 pub const AUDIT_LANDLOCK_DOMAIN: u32 = 1424;
+pub const AUDIT_MAC_TASK_CONTEXTS: u32 = 1425;
+pub const AUDIT_MAC_OBJ_CONTEXTS: u32 = 1426;
 pub const AUDIT_FIRST_KERN_ANOM_MSG: u32 = 1700;
 pub const AUDIT_LAST_KERN_ANOM_MSG: u32 = 1799;
 pub const AUDIT_ANOM_PROMISCUOUS: u32 = 1700;
@@ -776,11 +781,13 @@ pub const PT_TRAP: u32 = 40;
 pub const PT_DAR: u32 = 41;
 pub const PT_DSISR: u32 = 42;
 pub const PT_RESULT: u32 = 43;
-pub const PT_DSCR: u32 = 44;
-pub const PT_REGS_COUNT: u32 = 44;
-pub const PT_FPR0: u32 = 48;
-pub const PT_FPR31: u32 = 110;
-pub const PT_FPSCR: u32 = 113;
+pub const PT_EXIT_FLAGS: u32 = 44;
+pub const PT_PAD: u32 = 47;
+pub const PT_DSCR: u32 = 48;
+pub const PT_REGS_COUNT: u32 = 48;
+pub const PT_FPR0: u32 = 52;
+pub const PT_FPR31: u32 = 114;
+pub const PT_FPSCR: u32 = 117;
 pub const PTRACE_GETVRREGS: u32 = 18;
 pub const PTRACE_SETVRREGS: u32 = 19;
 pub const PTRACE_GETEVRREGS: u32 = 20;
